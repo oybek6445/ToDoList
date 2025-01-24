@@ -87,3 +87,7 @@ h1 {
     color: #4CAF50;
     margin-right: 10px;
 }
+.todo-item .completed {
+    text-decoration: line-through;
+    color: gray;
+}
