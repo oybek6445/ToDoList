@@ -58,3 +58,44 @@ function editTask(taskSpan) {
         taskSpan.textContent = newText.trim();
     }
 }
+function toggleTaskCompletion(taskSpan) {
+    taskSpan.classList.toggle('completed');
+
+    const tasks = getTasksFromLocalStorage();
+    const taskIndex = Array.from(todoList.children).findIndex(
+        (item) => item.querySelector('span') === taskSpan
+    );
+    tasks[taskIndex].completed = taskSpan.classList.contains('completed');
+    saveTasksToLocalStorage(tasks);
+}
+
+
+function deleteTask(taskItem) {
+    const taskSpan = taskItem.querySelector('span');
+    taskItem.remove();
+
+    const tasks = getTasksFromLocalStorage();
+    const updatedTasks = tasks.filter(
+        (task) => task.text !== taskSpan.textContent
+    );
+    saveTasksToLocalStorage(updatedTasks);
+}
+
+
+function loadTasks() {
+    const tasks = getTasksFromLocalStorage();
+    tasks.forEach((task) => addTask(task.text, task.completed));
+}
+
+
+addButton.addEventListener('click', () => addTask(inputField.value));
+
+
+inputField.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        addTask(inputField.value);
+    }
+});
+
+// Dastlabki yuklash
+loadTasks();
