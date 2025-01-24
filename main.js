@@ -97,5 +97,5 @@ inputField.addEventListener('keypress', (e) => {
     }
 });
 
-// Dastlabki yuklash
+
 loadTasks();
